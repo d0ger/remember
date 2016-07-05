@@ -21,4 +21,26 @@ class Controller_Test extends Controller {
 		}
 	}
 
+	public function action_add()
+	{
+		header('Content-Type: text/html; charset=utf-8');
+//		echo $this->request->method();
+//		exit;
+
+		if ($this->request->method() == 'POST') {
+
+			$values = $this->request->post();
+//			echo "<pre>";
+//			print_r($values);
+//			echo "</pre>";
+//			exit;
+
+			$model = new Model_Test();
+			$model->values($values)->save();
+
+			$this->response->body("Тест добавлен");
+		} else {
+			$this->response->body(View::factory('tests/add'));
+		}
+	}
 }
