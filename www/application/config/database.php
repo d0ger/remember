@@ -40,8 +40,8 @@ return array
 			 * boolean  persistent  use persistent connections?
 			 */
 			'dsn'        => 'mysql:host=localhost;dbname=remember',
-			'username'   => 'root',
-			'password'   => 'root',
+			'username'   => 'mysql',
+			'password'   => 'mysql',
 			'persistent' => FALSE,
 		),
 		/**

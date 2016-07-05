@@ -9,20 +9,16 @@ class Controller_Test extends Controller {
 
 	public function action_test()
 	{
-//		$sql = "SELECT * FROM `tests`";
-//
-//		$res = DB::query(Database::SELECT, $sql)
-//			->execute();
-//
-//		print_r($res);
+	}
 
+	public function action_list()
+	{
 		$model = new Model_Test();
 		$tests = $model->find_all();
 
 		foreach ($tests as $test) {
-			echo "<br>$test->question - $test->date_create";
+			echo "<br>$test->question - $test->answer - $test->date_created";
 		}
-		echo 'test2';
 	}
 
-} // End Welcome
+}
