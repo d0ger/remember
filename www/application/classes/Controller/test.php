@@ -20,20 +20,16 @@ class Controller_Test extends Controller {
 
 	public function action_test()
 	{
-//		$sql = "SELECT * FROM `tests`";
-//
-//		$res = DB::query(Database::SELECT, $sql)
-//			->execute();
-//
-//		print_r($res);
+	}
 
+	public function action_list()
+	{
 		$model = new Model_Test();
 		$tests = $model->find_all();
 
 		foreach ($tests as $test) {
-			echo "<br>$test->question - $test->date_create";
+			echo "<br>$test->question - $test->answer - $test->date_created";
 		}
-		echo 'test2';
 	}
 
 	public function action_add()
@@ -52,4 +48,25 @@ class Controller_Test extends Controller {
 		}
 	}
 
-} // End Welcome
+}
+//		header('Content-Type: text/html; charset=utf-8');
+////		echo $this->request->method();
+////		exit;
+//
+//		if ($this->request->method() == 'POST') {
+//
+//			$values = $this->request->post();
+////			echo "<pre>";
+////			print_r($values);
+////			echo "</pre>";
+////			exit;
+//
+//			$model = new Model_Test();
+//			$model->values($values)->save();
+//
+//			$this->response->body("Тест добавлен");
+//		} else {
+//			$this->response->body(View::factory('tests/add'));
+//		}
+//	}
+//}
