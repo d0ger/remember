@@ -28,7 +28,7 @@ class Controller_Test extends Controller {
 		$tests = $model->find_all();
 
 		foreach ($tests as $test) {
-			echo "<br>$test->question - $test->answer - $test->date_created";
+			echo "<br>$test->question - $test->answer - $test->date_create";
 		}
 	}
 

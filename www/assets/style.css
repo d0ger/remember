@@ -4,3 +4,15 @@
 .row {
     display: table-row;
 }
+.date-create-col {
+    min-width: 160px;
+}
+.question-col {
+    min-width: 300px;
+}
+.answer-col {
+    min-width: 300px;
+}
+.table-header.row {
+    font-weight: 700;
+}
