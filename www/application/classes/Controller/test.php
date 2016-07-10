@@ -20,6 +20,15 @@ class Controller_Test extends Controller {
 
 	public function action_test()
 	{
+		$tests = Model_Test::find_for_repeat();
+
+		$content = View::factory('test/test', array(
+			'tests' => $tests,
+		));
+
+		$this->response->body(View::factory('template', array(
+			'content' => $content,
+		)));
 	}
 
 	public function action_list()
