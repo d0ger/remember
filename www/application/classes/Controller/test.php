@@ -20,7 +20,16 @@ class Controller_Test extends Controller {
 
 	public function action_test()
 	{
-		$tests = Model_Test::find_for_repeat();
+
+		$action = $this->request->post('action');
+
+		switch ($action) {
+			case 'start':
+
+				break;
+		}
+
+		$tests = Model_Item::find_for_repeat();
 
 		$content = View::factory('test/test', array(
 			'tests' => $tests,
@@ -33,7 +42,7 @@ class Controller_Test extends Controller {
 
 	public function action_list()
 	{
-		$model = new Model_Test();
+		$model = new Model_Item();
 		$tests = $model->find_all();
 
 		foreach ($tests as $test) {
@@ -45,7 +54,7 @@ class Controller_Test extends Controller {
 	{
 		if ($this->request->method() == 'POST') {
 
-			$test = new Model_Test();
+			$test = new Model_Item();
 			$test->question = $this->request->post('question');
 			$test->answer = $this->request->post('answer');
 			$test->save();

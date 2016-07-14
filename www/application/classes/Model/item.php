@@ -1,21 +1,16 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: d0ger
- * Date: 16.05.2016
- * Time: 22:48
- *
  * @property Model_NextRepeat next_repeat
  */
-class Model_Test extends ORM
+class Model_Item extends ORM
 {
-    protected $_table_name = 'tests';
+    protected $_table_name = 'items';
 
     public $_has_one = array(
         'next_repeat' => array(
             'model' => 'NextRepeat',
-            'foreign_key' => 'test_id'
+            'foreign_key' => 'item_id'
         )
     );
 

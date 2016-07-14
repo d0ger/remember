@@ -6,7 +6,7 @@
  * Time: 21:10
  */
 
-/** @var Model_Test[] $tests */
+/** @var Model_Item[] $tests */
 ?>
 
 <div class="table-header row">
