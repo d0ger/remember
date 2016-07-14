@@ -4,17 +4,18 @@
  * Date: 14.07.2016
  *
  * @property int    id
- * @property date date_finish
+ * @property int    user_id
+ * @property date   date_finish
  *
  * @property Model_User     user
  */
-class Model_UsersTest extends ORM
+class Model_Test extends ORM
 {
-    protected $_table_name = 'results';
+    protected $_table_name = 'tests';
 
     protected $_belongs_to = array(
         'user' => array(
-            'model' => 'User',
+            'model' => 'Userx',
             'foreign_key' => 'user_id'
         ),
     );

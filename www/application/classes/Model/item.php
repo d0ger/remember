@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * @property int id
+ *
  * @property Model_NextRepeat next_repeat
  */
 class Model_Item extends ORM
@@ -14,14 +16,19 @@ class Model_Item extends ORM
         )
     );
 
-    public static function find_for_repeat()
+    public static function find_for_repeat($count = null)
     {
         $model = new self();
-        $tests = $model
+        $model
             ->with('next_repeat')
             ->where('next_repeat.next_date', '<=', DB::expr('curdate()'))
-            ->order_by('next_repeat.next_date')
-            ->find_all();
+            ->order_by('next_repeat.next_date');
+
+        if (!empty($count)) {
+            $model->limit($count);
+        }
+
+        $tests = $model->find_all();
 
         return $tests;
     }

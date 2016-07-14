@@ -25,7 +25,8 @@ class Controller_Test extends Controller {
 
 		switch ($action) {
 			case 'start':
-
+				$this->action_start();
+				exit;
 				break;
 		}
 
@@ -38,6 +39,23 @@ class Controller_Test extends Controller {
 		$this->response->body(View::factory('template', array(
 			'content' => $content,
 		)));
+	}
+
+	public function action_start()
+	{
+		$count_items_in_test = 2;
+		$items = Model_Item::find_for_repeat($count_items_in_test);
+		$new_test = new Model_Test();
+		$new_test->user_id = 1;
+		$new_test->save();
+
+		/** @var Model_Item $item */
+		foreach ($items as $item) {
+			$new_result = new Model_Result();
+			$new_result->item_id = $item->id;
+			$new_result->test_id = $new_test->id;
+			$new_result->save();
+		}
 	}
 
 	public function action_list()
