@@ -1,7 +1,10 @@
 <?php
 
 /**
- * @property int id
+ * @property int    id
+ * @property string question
+ * @property string answer
+ * @property date date_create
  *
  * @property Model_NextRepeat next_repeat
  */
@@ -31,5 +34,37 @@ class Model_Item extends ORM
         $tests = $model->find_all();
 
         return $tests;
+    }
+
+    public static function get_next()
+    {
+        $model = new self();
+
+        return $model
+            ->select(array('results.id', 'result_id'))
+            ->join('results')
+            ->on('results.item_id', '=', 'item.id')
+            ->join('tests')
+            ->on('tests.id', '=', 'results.test_id')
+            ->where('tests.user_id', '=', Model_User::get_current_user()->id)
+            ->where('results.result', 'IS', null)
+            ->order_by('results.id', 'asc')
+            ->find();
+    }
+
+    public static function get_next_for_set_result()
+    {
+        $model = new self();
+
+        return $model
+            ->select(array('results.id', 'result_id'))
+            ->join('results')
+            ->on('results.item_id', '=', 'item.id')
+            ->join('tests')
+            ->on('tests.id', '=', 'results.test_id')
+            ->where('tests.user_id', '=', Model_User::get_current_user()->id)
+            ->where('results.result', '=', 0)
+            ->order_by('results.id', 'asc')
+            ->find();
     }
 }

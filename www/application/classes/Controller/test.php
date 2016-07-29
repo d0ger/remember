@@ -20,20 +20,91 @@ class Controller_Test extends Controller {
 
 	public function action_test()
 	{
+		if (Model_Test::get_current_test()->loaded()) {
+			$content = View::factory('test/exist_current_test');
 
-		$action = $this->request->post('action');
+			$this->response->body(View::factory('template', array(
+				'content' => $content,
+			)));
+		} else {
+			$action = $this->request->post('action');
 
-		switch ($action) {
-			case 'start':
-				$this->action_start();
-				exit;
-				break;
+			switch ($action) {
+				case 'start':
+					$this->action_start();
+					exit;
+					break;
+			}
+
+			$tests = Model_Item::find_for_repeat();
+
+			$content = View::factory('test/test', array(
+				'tests' => $tests,
+			));
+
+			$this->response->body(View::factory('template', array(
+				'content' => $content,
+			)));
+		}
+	}
+
+	public function action_next()
+	{
+		if ($result_id = $this->request->post('result_id')) {
+			Model_Result::mark_completed($result_id);
 		}
 
-		$tests = Model_Item::find_for_repeat();
+		$item = Model_Item::get_next();
 
-		$content = View::factory('test/test', array(
-			'tests' => $tests,
+		if (!$item->loaded())
+		{
+			$this->redirect('/test/result/');
+		}
+
+		$content = View::factory('test/question', array(
+			'item' => $item,
+		));
+
+		$this->response->body(View::factory('template', array(
+			'content' => $content,
+		)));
+	}
+
+	public function action_result()
+	{
+//		echo Debug::vars($_REQUEST);
+//		exit;
+
+		if (($result_id = $this->request->post('result_id')) && ($result = $this->request->post('result'))) {
+			Model_Result::set_result($result_id, $result);
+		}
+
+		$item = Model_Item::get_next_for_set_result();
+
+		if ($item->loaded()) {
+			$content = View::factory('test/set_result', array(
+				'item' => $item,
+			));
+		} else { // тест закончен
+
+			Model_Test::finish_current();
+
+			$content = View::factory('test/finish', array(
+				'item' => $item,
+			));
+		}
+
+		$this->response->body(View::factory('template', array(
+			'content' => $content,
+		)));
+	}
+
+	public function action_continue()
+	{
+		$item = Model_Item::get_next();
+
+		$content = View::factory('test/question', array(
+			'item' => $item,
 		));
 
 		$this->response->body(View::factory('template', array(
@@ -46,7 +117,7 @@ class Controller_Test extends Controller {
 		$count_items_in_test = 2;
 		$items = Model_Item::find_for_repeat($count_items_in_test);
 		$new_test = new Model_Test();
-		$new_test->user_id = 1;
+		$new_test->user_id = Model_User::get_current_user();
 		$new_test->save();
 
 		/** @var Model_Item $item */

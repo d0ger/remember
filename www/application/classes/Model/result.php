@@ -24,4 +24,18 @@ class Model_Result extends ORM
             'foreign_key' => 'test_id',
         ),
     );
+
+    public static function mark_completed($id)
+    {
+        $result = new self($id);
+        $result->result = 0;
+        $result->save();
+    }
+
+    public static function set_result($id, $result)
+    {
+        $model_result = new self($id);
+        $model_result->result = $result;
+        $model_result->save();
+    }
 }
