@@ -2,6 +2,12 @@
 
 class Controller_Test extends Controller {
 
+	public function action_debug()
+	{
+		Model_NextRepeat::update_next_date(3);
+		echo 'test';
+	}
+
 	public function action_index()
 	{
 		$tests = ORM::factory('Test')
@@ -77,6 +83,7 @@ class Controller_Test extends Controller {
 
 		if (($result_id = $this->request->post('result_id')) && ($result = $this->request->post('result'))) {
 			Model_Result::set_result($result_id, $result);
+//			Model_NextRepeat::
 		}
 
 		$item = Model_Item::get_next_for_set_result();
