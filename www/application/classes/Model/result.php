@@ -37,5 +37,7 @@ class Model_Result extends ORM
         $model_result = new self($id);
         $model_result->result = $result;
         $model_result->save();
+
+        Model_NextRepeat::update_next_date($model_result->item_id);
     }
 }
