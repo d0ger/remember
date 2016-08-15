@@ -10,17 +10,8 @@ class Controller_Test extends Controller {
 
 	public function action_index()
 	{
-		$tests = ORM::factory('Test')
-			->order_by('id', 'desc')
-			->limit(10)
-			->find_all();
-
-		$content = View::factory('test/list', array(
-			'tests' => $tests,
-		));
-
 		$this->response->body(View::factory('template', array(
-			'content' => $content,
+			'content' => '',
 		)));
 	}
 
@@ -134,6 +125,8 @@ class Controller_Test extends Controller {
 			$new_result->test_id = $new_test->id;
 			$new_result->save();
 		}
+
+		$this->redirect('/test/next/');
 	}
 
 	public function action_list()

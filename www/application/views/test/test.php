@@ -22,3 +22,6 @@
         <div><?=$test->answer?></div>
     </div>
 <? endforeach; ?>
+
+<br>
+<a href="/test/start/">Начать тестирование</a>
