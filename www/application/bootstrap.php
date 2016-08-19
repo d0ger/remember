@@ -113,11 +113,30 @@ Kohana::init(array(
  */
 Kohana::$log->attach(new Log_File(APPPATH.'logs'));
 
+Kohana::$environment = Kohana::PRODUCTION;
+
+if (file_exists(DOCROOT."env.php"))
+{
+	require_once DOCROOT."env.php";
+	Kohana::$environment = ENV;
+}
+
 /**
  * Attach a file reader to config. Multiple readers are supported.
  */
+switch (Kohana::$environment) {
+	case Kohana::TESTING:
+		$config_directory = 'test';
+		break;
+	case Kohana::DEVELOPMENT:
+		$config_directory = 'dev';
+		break;
+	default:
+		$config_directory = 'prod';
+		break;
+}
 Kohana::$config->attach(new Config_File);
-Kohana::$config->attach(new Config_File('config/dev'));
+Kohana::$config->attach(new Config_File('config/'.$config_directory));
 
 /**
  * Enable modules. Modules are referenced by a relative or absolute path.
