@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+public_html
+www/application/config/prod/*
+www/application/config/test/*
+www/env.php
+
+### Kohana template
+application/cache/*
+application/logs/*
