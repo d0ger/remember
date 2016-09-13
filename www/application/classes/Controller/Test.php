@@ -148,6 +148,8 @@ class Controller_Test extends Controller {
 			$test->answer = $this->request->post('answer');
 			$test->save();
 
+			Model_NextRepeat::add_new_item($test->id);
+
 			$this->redirect('test');
 
 		} else {

@@ -25,6 +25,13 @@ class Model_NextRepeat extends ORM
 
         $days = $result['points'];
 
+        $add = $days - 3;
+
+        if ($add > 0)
+        {
+            $days += $add;
+        }
+
         if ($days <= 0) {
             $days = 1;
         }
@@ -34,5 +41,14 @@ class Model_NextRepeat extends ORM
             ->where('user_id', '=', Model_User::get_current_user()->id)
             ->where('item_id', '=', $item_id)
             ->execute();
+    }
+
+    public static function add_new_item($item_id)
+    {
+        $model = new self();
+        $model->item_id = $item_id;
+        $model->user_id = Model_User::get_current_user()->id;
+        $model->next_date = date("Y-m-d");
+        $model->save();
     }
 }
