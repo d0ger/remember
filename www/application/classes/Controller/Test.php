@@ -69,12 +69,8 @@ class Controller_Test extends Controller {
 
 	public function action_result()
 	{
-//		echo Debug::vars($_REQUEST);
-//		exit;
-
 		if (($result_id = $this->request->post('result_id')) && ($result = $this->request->post('result'))) {
 			Model_Result::set_result($result_id, $result);
-//			Model_NextRepeat::
 		}
 
 		$item = Model_Item::get_next_for_set_result();
@@ -112,7 +108,7 @@ class Controller_Test extends Controller {
 
 	public function action_start()
 	{
-		$count_items_in_test = 2;
+		$count_items_in_test = 5;
 		$items = Model_Item::find_for_repeat($count_items_in_test);
 		$new_test = new Model_Test();
 		$new_test->user_id = Model_User::get_current_user();
@@ -158,24 +154,3 @@ class Controller_Test extends Controller {
 	}
 
 }
-//		header('Content-Type: text/html; charset=utf-8');
-////		echo $this->request->method();
-////		exit;
-//
-//		if ($this->request->method() == 'POST') {
-//
-//			$values = $this->request->post();
-////			echo "<pre>";
-////			print_r($values);
-////			echo "</pre>";
-////			exit;
-//
-//			$model = new Model_Test();
-//			$model->values($values)->save();
-//
-//			$this->response->body("Тест добавлен");
-//		} else {
-//			$this->response->body(View::factory('tests/add'));
-//		}
-//	}
-//}
