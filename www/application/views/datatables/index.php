@@ -55,7 +55,8 @@
                 null,
                 null,
                 null
-            ]
+            ],
+            "order": [[ 0, "desc" ]]
         } );
 
         table.columns().every( function () {
