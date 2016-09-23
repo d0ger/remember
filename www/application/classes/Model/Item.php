@@ -24,11 +24,12 @@ class Model_Item extends ORM
         $model = new self();
         $model
             ->with('next_repeat')
-            ->where('next_repeat.next_date', '<=', DB::expr('curdate()'))
-            ->order_by('next_repeat.next_date');
+            ->where('next_repeat.next_date', '<=', DB::expr('curdate()'));
 
         if (!empty($count)) {
-            $model->limit($count);
+            $model
+                ->order_by(DB::expr('RAND()'))
+                ->limit($count);
         }
 
         $tests = $model->find_all();
