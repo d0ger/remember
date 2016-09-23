@@ -344,7 +344,7 @@ abstract class Kohana_Paginate
 		}
 
 		$this->_result = $this->_execute();
-		
+
 		$this->_count = $this->_count();
 		
 		$this->_count_total = $this->_count_total();

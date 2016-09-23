@@ -17,6 +17,7 @@
         <a href="/test/">Главная</a>
         <a href="/test/test">Тестирование</a>
         <a href="/test/add">Добавить вопрос</a>
+        <a href="/datatables">Вопросы</a>
     </div>
     <?=$content?>
 </body>

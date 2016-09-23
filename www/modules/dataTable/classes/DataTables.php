@@ -43,6 +43,8 @@ class DataTables extends Kohana_DataTables {
 				sub-request, have controller pass `$this->request`.');
 
 		$columns = $this->_paginate->columns();
+//		print_r($columns);
+//		exit;
 
 		if ($request->query('iSortCol_0') !== NULL)
 		{
@@ -59,6 +61,16 @@ class DataTables extends Kohana_DataTables {
 			}
 		}
 
+		if (!empty($request->query('order')))
+		{
+			foreach ($request->query('order') as $sort_column)
+			{
+				$sort = 'Paginate::SORT_' . strtoupper($sort_column['dir']);
+//				$sort_column = $columns[$sort_column['column']];
+				$this->_paginate->sort($this->_sortables[$sort_column['column']], constant($sort));
+			}
+		}
+
 		if ($request->query('iDisplayStart') !== NULL && $request->query('iDisplayLength') != '-1')
 		{
 			$start = $request->query('iDisplayStart');
@@ -67,9 +79,11 @@ class DataTables extends Kohana_DataTables {
 			$this->_paginate->limit($start, $length);
 		}
 
-		if ($request->query('sSearch'))
+		$request_search = $request->query('search');
+
+		if (!empty($request_search['value']))
 		{
-			$this->_paginate->search($request->query('sSearch'));
+			$this->_paginate->search($request_search['value']);
 		}
 
 		$this->_result = $this->_paginate
