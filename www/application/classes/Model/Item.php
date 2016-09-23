@@ -4,6 +4,7 @@
  * @property int    id
  * @property string question
  * @property string answer
+ * @property string comment
  * @property date date_create
  *
  * @property Model_NextRepeat next_repeat

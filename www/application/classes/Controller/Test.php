@@ -4,8 +4,9 @@ class Controller_Test extends Controller {
 
 	public function action_debug()
 	{
-		Model_NextRepeat::update_next_date(3);
-		echo 'test';
+		$model = new Model_Item();
+		$model->find_all();
+		echo $model->last_query();
 	}
 
 	public function action_index()
@@ -142,6 +143,7 @@ class Controller_Test extends Controller {
 			$test = new Model_Item();
 			$test->question = $this->request->post('question');
 			$test->answer = $this->request->post('answer');
+			$test->comment = $this->request->post('comment');
 			$test->save();
 
 			Model_NextRepeat::add_new_item($test->id);
@@ -149,8 +151,38 @@ class Controller_Test extends Controller {
 			$this->redirect('test');
 
 		} else {
-			$this->response->body(View::factory('test/add'));
+			$content = View::factory('test/add');
+
+			$this->response->body(View::factory('template', array(
+				'content' => $content,
+			)));
 		}
 	}
 
+	public function action_edit()
+	{
+		$item_id = (int) Request::current()->param('id');
+		$item = new Model_Item($item_id);
+
+		if (!$item->loaded()) {
+			HTTP_Exception_404::response(new Exception('Вопрос не найден'));
+		}
+
+		if ($this->request->method() == 'POST') {
+
+			$item->question = $this->request->post('question');
+			$item->answer = $this->request->post('answer');
+			$item->comment = $this->request->post('comment');
+			$item->save();
+
+			$this->redirect('/datatables');
+
+		} else {
+			$content = View::factory('test/edit', array('item' => $item));
+
+			$this->response->body(View::factory('template', array(
+				'content' => $content,
+			)));
+		}
+	}
 }

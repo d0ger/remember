@@ -1,3 +1,6 @@
+body {
+    margin: 0;
+}
 .row div {
     display: table-cell;
 }
@@ -25,3 +28,74 @@
 #menu {
     padding-bottom: 20px;
 }
+
+textarea {
+    width: 200px;
+    height: 100px;
+    border: 1px #aaa solid;
+}
+
+.form-row {
+    margin: 15px 0;
+}
+
+button {
+    min-width: 120px;
+    min-height: 30px;
+}
+
+ul {
+    list-style: none;
+    margin: 0 auto;
+}
+a {
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    transition: .5s linear;
+}
+i {
+    margin-right: 10px;
+}
+nav {
+    display: block;
+    /*width: 660px;*/
+    margin: 0 auto 30px;
+}
+
+.three ul {
+    padding: 0;
+    background: #E4EFD1;
+}
+.three li {
+    display: inline-block;
+}
+.three a {
+    padding: 1em;
+    display: block;
+    color: #74924C;
+    border-right: 1px solid #BAD78B;
+    background: rgba(186, 215, 139, .3);
+}
+.three a:hover {background: #BAD78B}
+
+form {
+    margin: 15px;
+    padding: 2px;
+}
+
+.two ul {
+    background: #D4E7EE;
+    overflow: hidden;
+    padding: 0;
+}
+.two li {
+    float: left;
+}
+.two a {
+    display: block;
+    padding: 1em;
+    border-right: 1px solid #ADC0CE;
+    background: rgba(173, 192, 206, .3);
+    color: #29838C;
+}
+.two a:hover {background: #ADC0CE}
