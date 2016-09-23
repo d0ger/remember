@@ -7,4 +7,4 @@ www/env.php
 
 ### Kohana template
 application/cache/*
-application/logs/*
+www/application/logs/*
