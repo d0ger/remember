@@ -25,14 +25,9 @@ class Model_NextRepeat extends ORM
 
         $days = $result['points'];
 
-        $add = $days - 3;
-
-        if ($add > 0)
-        {
-            $days += $add;
-        }
-
-        if ($days <= 0) {
+        if ($days >= 2) {
+            $days = $days * 2;
+        } else {
             $days = 1;
         }
 
